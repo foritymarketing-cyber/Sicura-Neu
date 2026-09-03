@@ -110,4 +110,12 @@
   <symbol id="icon-heart" viewBox="0 0 24 24">
     <path fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" d="M12 20s-7.5-4.7-9.5-9.3C1.3 7.5 3 4.5 6.3 4c2-.3 3.7.7 5.7 3 2-2.3 3.7-3.3 5.7-3 3.3.5 5 3.5 3.8 6.7C19.5 15.3 12 20 12 20z"/>
   </symbol>
+
+  <symbol id="icon-star" viewBox="0 0 24 24">
+    <path fill="currentColor" stroke="none" d="M12 3.2l2.6 5.6 6 .7-4.5 4.1 1.2 6-5.3-3-5.3 3 1.2-6-4.5-4.1 6-.7 2.6-5.6z"/>
+  </symbol>
+
+  <symbol id="icon-facebook" viewBox="0 0 24 24">
+    <path fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" d="M15 8.5h2V5.2c-.35-.05-1.55-.15-2.95-.15-2.92 0-4.92 1.83-4.92 5.2v2.75H6.3v3.7h2.83V21h3.7v-8.3h2.83l.45-3.7h-3.28V10.6c0-1.07.29-1.8 1.83-1.8z"/>
+  </symbol>
 </svg>

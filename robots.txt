@@ -2,5 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /impressum
 Disallow: /datenschutz
+Disallow: /danke
+Disallow: /404
 
 Sitemap: https://www.sicura-sicherheitstechnik.de/sitemap.xml
