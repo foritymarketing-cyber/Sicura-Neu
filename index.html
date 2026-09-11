@@ -60,25 +60,35 @@
             <a class="btn btn-primary btn-lg" href="kontakt.html">Kostenlose Schwachstellenanalyse anfragen</a>
             <a class="btn btn-secondary btn-lg" href="tel:+4962499379999">06249 937 9999</a>
           </div>
-          <div class="hero-meta">
-            <div class="hero-meta-item">
-              <strong>2010</strong>
-              <span>Seit diesem Jahr im Einsatz</span>
-            </div>
-            <div class="hero-meta-item">
-              <strong>~100&nbsp;km</strong>
-              <span>Rund um Dalheim, Rheinhessen &amp; Rhein-Main</span>
-            </div>
-            <div class="hero-meta-item">
-              <strong>1:1</strong>
-              <span>Persönlicher Ansprechpartner</span>
-            </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stat-Band: Vertrauens-Zahlen als eigenständiges Design-Element -->
+    <section class="stat-band" data-reveal-group>
+      <div class="container">
+        <div class="stat-grid">
+          <div class="stat-item" data-reveal>
+            <span class="stat-number" data-stat-target="2010" data-stat-decimals="0">2010</span>
+            <span class="stat-label">Seit diesem Jahr im Einsatz</span>
+          </div>
+          <div class="stat-item" data-reveal>
+            <span class="stat-number" data-stat-target="100" data-stat-decimals="0" data-stat-prefix="~" data-stat-suffix="&nbsp;km">~100&nbsp;km</span>
+            <span class="stat-label">Einsatzgebiet um Dalheim, Rheinhessen &amp; Rhein-Main</span>
+          </div>
+          <div class="stat-item" data-reveal>
+            <span class="stat-number">1:1</span>
+            <span class="stat-label">Persönlicher Ansprechpartner, kein Callcenter</span>
+          </div>
+          <div class="stat-item" data-reveal>
+            <span class="stat-number" data-stat-target="5" data-stat-decimals="1">5,0</span>
+            <span class="stat-label">von 5 bei 14 Google-Bewertungen</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Kernbereiche -->
+    <!-- Kernbereiche: Kachel-Navigation zu den Hauptleistungen -->
     <section class="section section--alt">
       <div class="container">
         <div class="section-head">
@@ -87,21 +97,27 @@
         </div>
 
         <div class="card-grid" data-reveal-group>
-          <a class="card" href="leistungen-videoueberwachung.html" data-reveal>
-            <div class="card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-camera"></use></svg></div>
-            <h3>01 – Videoüberwachung</h3>
-            <p>Kameratechnik für Wohnhäuser, Werkstatt, Lager oder Praxis – geplant für die Stellen, an denen sie wirklich etwas bringt, und datenschutzkonform eingerichtet.</p>
-            <span class="card-link">Mehr zur Videoüberwachung <svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-arrow-right"></use></svg></span>
+          <a class="card card--media" href="leistungen-videoueberwachung.html" data-reveal>
+            <div class="card-media">
+              <img src="assets/leistungen-videoueberwachung-karte.jpg" alt="Videoüberwachungskamera an einer Gebäudefassade" loading="lazy" width="1000" height="667">
+              <span class="card-media-caption">Videoüberwachung</span>
+            </div>
+            <div class="card-body">
+              <div class="card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-camera"></use></svg></div>
+              <h3>01 – Videoüberwachung</h3>
+              <p>Kameratechnik für Wohnhäuser, Werkstatt, Lager oder Praxis – geplant für die Stellen, an denen sie wirklich etwas bringt, und datenschutzkonform eingerichtet.</p>
+              <span class="card-link">Mehr zur Videoüberwachung <svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-arrow-right"></use></svg></span>
+            </div>
           </a>
 
-          <a class="card" href="leistungen-einbruchmeldeanlagen.html" data-reveal>
+          <a class="card card--tile" href="leistungen-einbruchmeldeanlagen.html" data-reveal>
             <div class="card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-bell"></use></svg></div>
             <h3>02 – Einbruchmeldeanlagen</h3>
             <p>Alarmtechnik, die meldet, bevor Schaden entsteht. Funk oder verkabelt, nachrüstbar im Bestand, Meldung direkt auf Ihr Telefon.</p>
             <span class="card-link">Mehr zu Einbruchmeldeanlagen <svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-arrow-right"></use></svg></span>
           </a>
 
-          <a class="card" href="leistungen-service-wartung.html" data-reveal>
+          <a class="card card--tile" href="leistungen-service-wartung.html" data-reveal>
             <div class="card-icon"><svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-wrench"></use></svg></div>
             <h3>03 – Service und Wartung</h3>
             <p>Wir bleiben nach der Installation Ihr Ansprechpartner: Wartung, Reparatur und Erweiterung der Anlagen, die wir gebaut haben.</p>
@@ -147,8 +163,41 @@
       </div>
     </section>
 
-    <!-- Fallbeispiel-Teaser -->
+    <!-- Solution-Overview: große Cards zu den Lösungswegen -->
     <section class="section section--alt">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Ihr Weg zu uns</p>
+          <h2>Wie es weitergeht</h2>
+        </div>
+
+        <div class="solution-grid" data-reveal-group>
+          <a class="solution-card solution-card--photo" href="leistungen.html" style="--solution-photo:url('assets/solution-kamera-fassade.png')" data-reveal>
+            <p class="solution-index">Für Zuhause &amp; Gewerbe</p>
+            <h3>Passende Lösung finden</h3>
+            <p>Videoüberwachung, Einbruchmeldeanlagen oder beides kombiniert – wir zeigen Ihnen, was zu Ihrem Objekt passt.</p>
+            <span class="card-link">Leistungen ansehen <svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-arrow-right"></use></svg></span>
+          </a>
+
+          <a class="solution-card" href="referenzen.html" data-reveal>
+            <p class="solution-index">Aus der Praxis</p>
+            <h3>Referenzen ansehen</h3>
+            <p>Drei Projekte aus Rheinhessen und dem Rhein-Main-Gebiet – anonymisiert, weil Diskretion bei Sicherheitstechnik zur Leistung gehört.</p>
+            <span class="card-link">Zu den Referenzen <svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-arrow-right"></use></svg></span>
+          </a>
+
+          <a class="solution-card" href="kontakt.html" data-reveal>
+            <p class="solution-index">Unverbindlich</p>
+            <h3>Kostenlose Analyse anfragen</h3>
+            <p>Wir sehen uns Ihr Objekt an und sagen Ihnen ehrlich, was sinnvoll ist – und was nicht.</p>
+            <span class="card-link">Anfrage schreiben <svg viewBox="0 0 24 24" aria-hidden="true"><use href="assets/icons.svg#icon-arrow-right"></use></svg></span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Fallbeispiel-Teaser -->
+    <section class="section">
       <div class="container" style="max-width:720px; text-align:center">
         <p class="eyebrow" style="justify-content:center">Aus der Praxis</p>
         <h2 class="h3" style="margin-top:var(--space-3)">Klinik im Rhein-Main-Gebiet</h2>

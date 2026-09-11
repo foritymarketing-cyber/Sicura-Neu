@@ -1,33 +1,63 @@
 /* ==========================================================================
    Sicura Sicherheitstechnik — Design Tokens & Basis-Stile
-   Stilrichtung: hell, editorial-minimalistisch, Apple-inspiriert
+   Stilrichtung: dunkel, selbstbewusst, technisch — inspiriert von
+   ajax.systems (siehe design-briefing-ajax-inspiration.md). Basis ist
+   durchgängig Schwarz, ein einziger Neongrün-Akzent wird bewusst sparsam
+   für CTAs, Hover- und Status-Zustände eingesetzt. `.section--alt` bleibt
+   ebenfalls dunkel und dient nur als minimal hellere Fläche zur Gliederung
+   aufeinanderfolgender Abschnitte, indem sie ein paar Oberflächen-Variablen
+   innerhalb ihres Scopes umdefiniert — jede Komponente (Cards, Buttons,
+   Icons …) folgt dem automatisch, weil sie ausschließlich über
+   CSS-Variablen eingefärbt ist.
    ========================================================================== */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+/* Selbst gehostete Variable Fonts (keine Verbindung zu Google Fonts zur
+   Laufzeit — siehe Datenschutzerklärung Abschnitt 4). Jede @font-face-Regel
+   zeigt auf dieselbe Variable-Font-Datei und wählt daraus per font-weight
+   die passende Schnittweite; das ist kein Duplikat-Download. */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('assets/fonts/inter-latin-variable.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Space Grotesk';
+  font-style: normal;
+  font-weight: 500 700;
+  font-display: swap;
+  src: url('assets/fonts/space-grotesk-latin-variable.woff2') format('woff2');
+}
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 
-  /* ---- Farben ---- */
-  --color-bg: #ffffff;
-  --color-bg-alt: #f6f8f9;
-  --color-surface: #ffffff;
-  --color-text: #0f1a1f;
-  --color-text-muted: #4b5b63;
-  --color-text-faint: #5f6d75;
-  --color-border: #e4e9eb;
-  --color-border-strong: #d3dbde;
+  /* ---- Farben: dunkle Basis (Header, Hero, Footer, Standard-Sections) ---- */
+  --color-bg: #0a0a0b;
+  --color-bg-deep: #000000;
+  --color-surface: #141416;
+  --color-surface-raised: #1c1c1f;
+  --color-text: #ffffff;
+  --color-text-muted: #b8b8bc;
+  --color-text-faint: #86868c;
+  --color-border: rgba(255, 255, 255, 0.10);
+  --color-border-strong: rgba(255, 255, 255, 0.20);
 
-  --color-accent: #14181b;
-  --color-accent-dark: #000000;
-  --color-accent-light: #eef0f1;
-  --color-accent-contrast: #ffffff;
+  --color-accent: #c6ff3d;
+  --color-accent-dim: #9fdb1f;
+  --color-accent-contrast: #071304;
+  --color-accent-soft: rgba(198, 255, 61, 0.12);
 
-  --color-danger: #b3491f;
-  --color-danger-bg: #fbf1ea;
-  --color-success: #1f7a4d;
+  --color-danger: #ff6b52;
+  --color-danger-bg: rgba(255, 107, 82, 0.12);
+  --color-success: var(--color-accent);
 
-  /* ---- Typografie ---- */
+  /* ---- Typografie ----
+     Space Grotesk: Display-Ebene (H1/H2, kurze Zeilen) — Ersatz für die
+     proprietäre "Ajax Space Font". Inter: Fließtext, UI, Buttons. */
+  --font-display: 'Space Grotesk', 'Inter', system-ui, -apple-system, sans-serif;
   --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   --fs-display: clamp(2.75rem, 2rem + 3.2vw, 4.75rem);
@@ -38,6 +68,7 @@
   --fs-body: 1rem;
   --fs-small: 0.9375rem;
   --fs-tiny: 0.8125rem;
+  --fs-stat: clamp(2.75rem, 2rem + 3vw, 4.25rem);
 
   /* ---- Abstände (4/8pt-Rhythmus) ---- */
   --space-1: 4px;
@@ -61,9 +92,10 @@
   --radius-lg: 28px;
   --radius-full: 999px;
 
-  --shadow-sm: 0 1px 2px rgba(15, 26, 31, 0.04), 0 1px 1px rgba(15, 26, 31, 0.03);
-  --shadow-md: 0 8px 24px rgba(15, 26, 31, 0.06), 0 2px 6px rgba(15, 26, 31, 0.04);
-  --shadow-lg: 0 24px 64px rgba(15, 26, 31, 0.10), 0 4px 12px rgba(15, 26, 31, 0.05);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3), 0 1px 1px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4), 0 2px 6px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 24px 64px rgba(0, 0, 0, 0.5), 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 0 1px rgba(198, 255, 61, 0.4), 0 8px 32px rgba(198, 255, 61, 0.15);
 
   /* ---- Bewegung ---- */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
@@ -155,17 +187,24 @@ h1,
 h2,
 h3,
 h4 {
+  font-family: var(--font-display);
   font-weight: 700;
   line-height: 1.1;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
   color: var(--color-text);
 }
 
+h3,
+h4 {
+  font-family: var(--font-sans);
+}
+
 .display {
+  font-family: var(--font-display);
   font-size: var(--fs-display);
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1.03;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.02em;
 }
 
 h1,
@@ -181,7 +220,8 @@ h2,
 h3,
 .h3 {
   font-size: var(--fs-h3);
-  letter-spacing: -0.01em;
+  font-weight: 700;
+  letter-spacing: -0.005em;
 }
 
 .lede {
@@ -196,9 +236,9 @@ h3,
   gap: var(--space-2);
   font-size: var(--fs-tiny);
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-accent);
+  color: var(--color-text-faint);
 }
 
 .eyebrow::before {
@@ -207,6 +247,8 @@ h3,
   height: 6px;
   border-radius: 50%;
   background: var(--color-accent);
+  box-shadow: 0 0 8px 1px rgba(198, 255, 61, 0.6);
+  flex-shrink: 0;
 }
 
 p {
@@ -228,8 +270,19 @@ p {
   padding-block: var(--section-padding);
 }
 
+/* ---- Alternierende dunkle Sections ----
+   Komplett schwarze Basis (Briefing Punkt 1: "fast durchgängig Schwarz").
+   `.section--alt` bleibt dunkel, hebt sich aber als eigene, minimal hellere
+   Fläche vom Seitenhintergrund ab – reine Rhythmus-/Gliederungsfunktion,
+   kein Licht/Dunkel-Wechsel mehr. Card-/Icon-/Formular-Komponenten
+   erben dafür unverändert ihre dunklen Grundfarben aus :root. */
 .section--alt {
-  background: var(--color-bg-alt);
+  background: #121214;
+
+  --color-bg: #121214;
+  --color-surface: #1c1c1f;
+  --color-surface-raised: #232326;
+  --color-border: rgba(255, 255, 255, 0.12);
 }
 
 .section-head {
@@ -264,9 +317,10 @@ p {
   left: var(--space-4);
   z-index: 1000;
   background: var(--color-accent);
-  color: #fff;
+  color: var(--color-accent-contrast);
   padding: var(--space-3) var(--space-5);
   border-radius: var(--radius-sm);
+  font-weight: 600;
   transition: top var(--duration-base) var(--ease-out);
 }
 
@@ -304,7 +358,8 @@ textarea:focus-visible {
   transition: transform var(--duration-fast) var(--ease-out),
     background-color var(--duration-base) var(--ease-out),
     box-shadow var(--duration-base) var(--ease-out),
-    border-color var(--duration-base) var(--ease-out);
+    border-color var(--duration-base) var(--ease-out),
+    color var(--duration-base) var(--ease-out);
 }
 
 .btn:active {
@@ -312,26 +367,27 @@ textarea:focus-visible {
   transition-duration: 90ms;
 }
 
+/* Primärer CTA: die einzige Fläche, die den Signalakzent vollflächig trägt. */
 .btn-primary {
   background: var(--color-accent);
-  color: #fff;
+  color: var(--color-accent-contrast);
   box-shadow: var(--shadow-sm);
 }
 
 .btn-primary:hover {
-  background: var(--color-accent-dark);
-  box-shadow: var(--shadow-md);
+  background: var(--color-accent-dim);
+  box-shadow: 0 0 0 1px rgba(198, 255, 61, 0.3), var(--shadow-md);
 }
 
 .btn-secondary {
-  background: var(--color-surface);
+  background: transparent;
   color: var(--color-text);
   border: 1px solid var(--color-border-strong);
 }
 
 .btn-secondary:hover {
   border-color: var(--color-accent);
-  color: var(--color-accent-dark);
+  color: var(--color-text);
 }
 
 .btn-ghost {
@@ -341,7 +397,7 @@ textarea:focus-visible {
 }
 
 .btn-ghost:hover {
-  color: var(--color-accent-dark);
+  color: var(--color-accent);
 }
 
 .btn-block {
@@ -361,6 +417,7 @@ textarea:focus-visible {
   position: sticky;
   top: 0;
   z-index: 100;
+  color: #fff;
 }
 
 /* Blur lebt auf einem Pseudo-Element statt direkt auf .site-header:
@@ -372,75 +429,35 @@ textarea:focus-visible {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: rgba(255, 255, 255, 0.78);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid rgba(228, 233, 235, 0.8);
+  background: rgba(10, 10, 11, 0.82);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   opacity: 1;
   transition: opacity var(--duration-base) var(--ease-out);
 }
 
 /* ---- Transparenter Header über dem Video-Hero ----
    Nur auf Seiten mit `body.has-video-hero` (Startseite): der Header startet
-   glasklar über dem Hero-Video und bekommt sein übliches weißes Glas erst,
-   sobald über die Hero-Höhe hinausgescrollt wurde (.is-scrolled, per JS in
-   script.js gesetzt). Alle anderen Seiten sind unverändert immer solide. */
+   glasklar über dem Hero-Video und bekommt sein dunkles Glas erst, sobald
+   über die Hero-Höhe hinausgescrollt wurde (.is-scrolled, per JS in
+   script.js gesetzt). Text bleibt durchgehend hell, weil die ganze Website
+   dunkel gestaltet ist — kein Farbumschlag nötig. */
 body.has-video-hero .site-header:not(.is-scrolled)::before {
   opacity: 0;
-}
-
-body.has-video-hero .site-header:not(.is-scrolled) .nav-progress {
-  background: rgba(255, 255, 255, 0.85);
-}
-
-body.has-video-hero .site-header:not(.is-scrolled) .brand,
-body.has-video-hero .site-header:not(.is-scrolled) .brand-mark,
-body.has-video-hero .site-header:not(.is-scrolled) .brand-name span,
-body.has-video-hero .site-header:not(.is-scrolled) .nav-links a,
-body.has-video-hero .site-header:not(.is-scrolled) .nav-toggle svg {
-  color: #fff;
-}
-
-body.has-video-hero .site-header:not(.is-scrolled) .nav-cta {
-  background: #fff;
-  color: var(--color-accent-dark);
-}
-
-body.has-video-hero .site-header:not(.is-scrolled) .nav-cta:hover {
-  background: rgba(255, 255, 255, 0.9);
-}
-
-/* Das mobile Menü hat immer ein blickdichtes, weißes Panel (siehe
-   .nav-desktop.is-open unten) – die weiße Schrift für den transparenten
-   Header über dem Hero-Video darf dort also nicht greifen, sonst ist der
-   Text unlesbar. */
-body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-links a,
-body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open ~ .nav-toggle svg,
-body.has-video-hero .site-header:not(.is-scrolled) .nav-toggle[aria-expanded='true'] svg {
-  color: var(--color-text-muted);
-}
-
-body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-links a[aria-current='page'] {
-  color: var(--color-text);
-}
-
-.brand,
-.brand-mark,
-.brand-name span {
-  transition: color var(--duration-base) var(--ease-out);
 }
 
 /* Material fallbacks: bei reduzierter Transparenz/erhöhtem Kontrast wird aus
    dem Glas-Effekt eine nahezu blickdichte Fläche statt eines Weichzeichners. */
 @media (prefers-reduced-transparency: reduce) {
   .site-header::before {
-    background: var(--color-bg);
+    background: var(--color-bg-deep);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
   }
 
   .nav-desktop {
-    background: var(--color-bg) !important;
+    background: var(--color-bg-deep) !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
   }
@@ -448,10 +465,10 @@ body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-lin
 
 @media (prefers-contrast: more) {
   .site-header::before {
-    background: var(--color-bg);
+    background: var(--color-bg-deep);
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
-    border-bottom-color: var(--color-border-strong);
+    border-bottom-color: rgba(255, 255, 255, 0.3);
   }
 }
 
@@ -471,6 +488,7 @@ body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-lin
   width: 100%;
   height: 2px;
   background: var(--color-accent);
+  box-shadow: 0 0 8px 0 rgba(198, 255, 61, 0.5);
   transform: scaleX(0);
   transform-origin: 0 50%;
 }
@@ -479,10 +497,11 @@ body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-lin
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.25rem;
   letter-spacing: -0.01em;
-  color: var(--color-text);
+  color: #fff;
 }
 
 .brand-mark {
@@ -494,9 +513,10 @@ body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-lin
 
 .brand-name span {
   display: block;
+  font-family: var(--font-sans);
   font-size: var(--fs-tiny);
   font-weight: 500;
-  color: var(--color-text-faint);
+  color: rgba(255, 255, 255, 0.55);
   letter-spacing: 0;
 }
 
@@ -516,17 +536,17 @@ body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-lin
   position: relative;
   font-weight: 500;
   font-size: var(--fs-small);
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.68);
   padding-block: var(--space-2);
   transition: color var(--duration-base) var(--ease-out);
 }
 
 .nav-links a:hover {
-  color: var(--color-text);
+  color: #fff;
 }
 
 .nav-links a[aria-current='page'] {
-  color: var(--color-text);
+  color: #fff;
 }
 
 .nav-links a[aria-current='page']::after {
@@ -538,6 +558,7 @@ body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-lin
   height: 2px;
   border-radius: var(--radius-full);
   background: var(--color-accent);
+  box-shadow: 0 0 6px 0 rgba(198, 255, 61, 0.6);
 }
 
 .nav-toggle {
@@ -547,6 +568,7 @@ body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-lin
   width: 44px;
   height: 44px;
   border-radius: var(--radius-sm);
+  color: #fff;
 }
 
 .nav-toggle svg {
@@ -570,7 +592,7 @@ body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-lin
   .nav-desktop {
     position: fixed;
     inset: 84px 0 0 0;
-    background: rgba(255, 255, 255, 0.98);
+    background: rgba(6, 6, 7, 0.97);
     backdrop-filter: blur(20px);
     flex-direction: column;
     align-items: stretch;
@@ -622,7 +644,7 @@ body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-lin
   margin-top: -84px;
   padding-top: calc(84px + clamp(56px, 8vw, 128px));
   padding-bottom: var(--section-padding);
-  background: linear-gradient(160deg, var(--color-accent-dark) 0%, var(--color-accent) 55%, #2b3338 100%);
+  background: linear-gradient(160deg, #000000 0%, #0a0a0b 55%, #121214 100%);
 }
 
 .hero .container {
@@ -632,14 +654,9 @@ body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-lin
   text-align: center;
 }
 
-/* ---- Dunkler Hero: Textfarben & Buttons an den dunklen Hintergrund anpassen ---- */
-
 .hero .eyebrow {
-  color: rgba(255, 255, 255, 0.75);
-}
-
-.hero .eyebrow::before {
-  background: currentColor;
+  color: rgba(255, 255, 255, 0.6);
+  justify-content: center;
 }
 
 .hero h1 {
@@ -647,11 +664,11 @@ body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-lin
 }
 
 .hero .lede {
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(255, 255, 255, 0.78);
 }
 
 .hero .hero-meta {
-  border-top-color: rgba(255, 255, 255, 0.18);
+  border-top-color: rgba(255, 255, 255, 0.14);
 }
 
 .hero .hero-meta-item strong {
@@ -659,30 +676,18 @@ body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-lin
 }
 
 .hero .hero-meta-item span {
-  color: rgba(255, 255, 255, 0.65);
-}
-
-.hero .btn-primary {
-  background: #fff;
-  color: var(--color-accent-dark);
-}
-
-.hero .btn-primary:hover {
-  background: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.55);
 }
 
 .hero .btn-secondary {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
-  border-color: rgba(255, 255, 255, 0.35);
+  border-color: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 }
 
 .hero .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.16);
-  border-color: rgba(255, 255, 255, 0.6);
-  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--color-accent);
 }
 
 /* ---- Liquid-Metal-Hintergrund: fließende, verschwommene Chrom-Flächen ----
@@ -712,7 +717,7 @@ body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-lin
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(160deg, rgba(0, 0, 0, 0.82) 0%, rgba(20, 24, 27, 0.55) 55%, rgba(43, 51, 56, 0.78) 100%);
+  background: linear-gradient(160deg, rgba(0, 0, 0, 0.88) 0%, rgba(10, 10, 11, 0.62) 55%, rgba(10, 10, 11, 0.85) 100%);
 }
 
 .lm-blob {
@@ -721,7 +726,7 @@ body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-lin
   border-radius: 50%;
   filter: blur(60px);
   mix-blend-mode: screen;
-  opacity: 0.55;
+  opacity: 0.45;
   will-change: transform;
 }
 
@@ -730,7 +735,7 @@ body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-lin
   height: 46vw;
   top: -14vw;
   left: -10vw;
-  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #aeb8bd 35%, transparent 70%);
+  background: radial-gradient(circle at 35% 35%, #ffffff 0%, #8f979c 35%, transparent 70%);
   animation: lm-drift-1 22s ease-in-out infinite;
 }
 
@@ -739,7 +744,7 @@ body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-lin
   height: 38vw;
   bottom: -16vw;
   right: -8vw;
-  background: radial-gradient(circle at 60% 40%, #dfe4e6 0%, #7c8790 40%, transparent 72%);
+  background: radial-gradient(circle at 60% 40%, #c3c9cb 0%, #52595d 40%, transparent 72%);
   animation: lm-drift-2 26s ease-in-out infinite;
 }
 
@@ -748,15 +753,19 @@ body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-lin
   height: 30vw;
   top: 30%;
   left: 55%;
-  background: radial-gradient(circle at 50% 50%, #c8ced1 0%, #4d565c 45%, transparent 75%);
+  background: radial-gradient(circle at 50% 50%, #9aa79b 0%, #2c3630 45%, transparent 75%);
   animation: lm-drift-3 19s ease-in-out infinite;
 }
 
 .lm-sheen {
+  /* Neutraler weißer Glanzstreifen (Metall-Reflexion) – bewusst ohne
+     Akzentfarbe, damit Grün wie im Briefing ausschließlich CTAs/Status
+     vorbehalten bleibt und nicht als Deko-Fläche im Hero-Hintergrund
+     auftaucht. */
   position: absolute;
   z-index: 2;
   inset: -20% -60%;
-  background: linear-gradient(75deg, transparent 40%, rgba(255, 255, 255, 0.14) 48%, rgba(255, 255, 255, 0.26) 50%, rgba(255, 255, 255, 0.14) 52%, transparent 60%);
+  background: linear-gradient(75deg, transparent 40%, rgba(255, 255, 255, 0.10) 48%, rgba(255, 255, 255, 0.22) 50%, rgba(255, 255, 255, 0.10) 52%, transparent 60%);
   animation: lm-sheen-sweep 9s ease-in-out infinite;
 }
 
@@ -811,8 +820,8 @@ body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-lin
 
 .hero h1 {
   font-size: var(--fs-display);
-  font-weight: 800;
-  letter-spacing: -0.03em;
+  font-weight: 700;
+  letter-spacing: -0.02em;
   line-height: 1.04;
   overflow-wrap: break-word;
   hyphens: auto;
@@ -840,6 +849,7 @@ body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-lin
 }
 
 .hero-meta-item strong {
+  font-family: var(--font-display);
   font-size: var(--fs-h3);
   font-weight: 700;
   letter-spacing: -0.01em;
@@ -848,6 +858,63 @@ body.has-video-hero .site-header:not(.is-scrolled) .nav-desktop.is-open .nav-lin
 .hero-meta-item span {
   font-size: var(--fs-tiny);
   color: var(--color-text-faint);
+}
+
+/* ==========================================================================
+   Stat-Band — Vertrauens-Zahlen groß inszeniert
+   ========================================================================== */
+
+.stat-band {
+  position: relative;
+  background: var(--color-bg-deep);
+  border-block: 1px solid var(--color-border);
+}
+
+.stat-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-7);
+}
+
+.stat-item {
+  padding-top: var(--space-4);
+  border-top: 2px solid var(--color-accent);
+  box-shadow: 0 0 8px 0 rgba(198, 255, 61, 0.25);
+}
+
+.stat-number {
+  /* tabular-nums: Ziffern haben gleiche Breite, damit die Count-up-
+     Animation (motion-effects.js) nicht ruckelt/springt, während sich
+     die Zahl ändert. */
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--fs-stat);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  color: var(--color-text);
+}
+
+.stat-label {
+  display: block;
+  margin-top: var(--space-3);
+  font-size: var(--fs-small);
+  color: var(--color-text-muted);
+  max-width: 24ch;
+}
+
+@media (max-width: 900px) {
+  .stat-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-6);
+  }
+}
+
+@media (max-width: 480px) {
+  .stat-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ==========================================================================
@@ -877,7 +944,7 @@ a.card {
 .card:hover {
   transform: translateY(-4px);
   box-shadow: var(--shadow-md);
-  border-color: var(--color-border-strong);
+  border-color: rgba(198, 255, 61, 0.35);
 }
 
 .card:active {
@@ -889,8 +956,8 @@ a.card {
   width: 52px;
   height: 52px;
   border-radius: var(--radius-md);
-  background: var(--color-accent-light);
-  color: var(--color-accent-dark);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--color-text);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -918,7 +985,7 @@ a.card {
   margin-top: var(--space-4);
   font-size: var(--fs-small);
   font-weight: 600;
-  color: var(--color-accent-dark);
+  color: var(--color-text);
 }
 
 .card-link svg {
@@ -927,14 +994,23 @@ a.card {
   transition: transform var(--duration-base) var(--ease-out);
 }
 
+.card:hover .card-link,
+.card-link:hover {
+  color: var(--color-accent);
+}
+
 .card:hover .card-link svg {
   transform: translateX(3px);
 }
 
+/* ---- Bild-Kacheln (Kachel-Navigation) ----
+   Großes Foto, beim Hover/Fokus zoomt es leicht und blendet zu einer
+   dunklen Textebene über — analog Ajax' erste Bildreihe. */
 .card--media {
   position: relative;
   overflow: hidden;
   padding: 0;
+  min-height: 320px;
 }
 
 .card-media {
@@ -948,13 +1024,19 @@ a.card {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 600ms var(--ease-out);
+}
+
+.card--media:hover .card-media img,
+.card--media:focus-visible .card-media img {
+  transform: scale(1.06);
 }
 
 .card-media::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0) 55%);
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.15) 55%, transparent 80%);
 }
 
 .card-media-caption {
@@ -963,6 +1045,7 @@ a.card {
   right: var(--space-6);
   bottom: var(--space-6);
   color: #fff;
+  font-family: var(--font-display);
   font-size: var(--fs-h3);
   font-weight: 700;
 }
@@ -972,7 +1055,7 @@ a.card {
   height: 100%;
   padding: var(--space-6);
   opacity: 0;
-  background: var(--color-surface);
+  background: var(--color-bg-deep);
   transition: opacity var(--duration-base) var(--ease-out);
 }
 
@@ -986,6 +1069,28 @@ a.card {
   opacity: 1;
 }
 
+/* ---- Icon-Kacheln ohne Foto: gleiche Grundfläche wie Bild-Kacheln, damit
+   sie im selben Grid neben `.card--media` nicht wie ein Fremdkörper wirken. */
+.card--tile {
+  min-height: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.card--tile .card-icon {
+  width: 60px;
+  height: 60px;
+}
+
+.card--tile .card-icon svg {
+  width: 30px;
+  height: 30px;
+}
+
+.card--tile p {
+  flex-grow: 1;
+}
+
 @media (max-width: 980px) {
   .card-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -995,6 +1100,113 @@ a.card {
 @media (max-width: 620px) {
   .card-grid {
     grid-template-columns: 1fr;
+  }
+
+  .card--media,
+  .card--tile {
+    min-height: 260px;
+  }
+}
+
+/* ==========================================================================
+   Solution-Overview — große Lösungswege-Cards
+   ========================================================================== */
+
+.solution-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-5);
+}
+
+.solution-card {
+  /* Der Kartenhintergrund ist immer der gleiche dunkle Verlauf, unabhängig
+     vom Section-Scope. Die Text-Variablen werden deshalb hier lokal fix auf
+     Hell-auf-Dunkel gesetzt statt vom Elternscope geerbt. */
+  --color-text: #ffffff;
+  --color-text-muted: rgba(255, 255, 255, 0.72);
+  --color-text-faint: rgba(255, 255, 255, 0.5);
+  --color-border: rgba(255, 255, 255, 0.12);
+
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 380px;
+  padding: var(--space-7);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: linear-gradient(155deg, #17181a 0%, #0a0a0b 70%);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  transition: transform var(--duration-base) var(--ease-out),
+    border-color var(--duration-base) var(--ease-out);
+}
+
+.solution-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 90% at 20% 0%, rgba(198, 255, 61, 0.10), transparent 55%);
+  opacity: 0;
+  transition: opacity var(--duration-base) var(--ease-out);
+}
+
+/* ---- Foto-Variante: große Szenenfotografie statt reinem Gradient,
+   solides Overlay darunter für garantierte Lesbarkeit (Briefing Punkt 4). ---- */
+.solution-card--photo {
+  background-image: linear-gradient(180deg, rgba(10, 10, 11, 0.25) 0%, rgba(6, 6, 7, 0.55) 55%, rgba(6, 6, 7, 0.94) 100%),
+    var(--solution-photo);
+  background-size: cover;
+  background-position: center;
+}
+
+.solution-card:hover,
+.solution-card:focus-visible {
+  transform: translateY(-4px);
+  border-color: rgba(198, 255, 61, 0.4);
+}
+
+.solution-card:hover::before,
+.solution-card:focus-visible::before {
+  opacity: 1;
+}
+
+.solution-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.solution-index {
+  font-size: var(--fs-tiny);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  margin-bottom: var(--space-5);
+}
+
+.solution-card h3 {
+  font-family: var(--font-display);
+  font-size: var(--fs-h3);
+  margin-bottom: var(--space-2);
+}
+
+.solution-card p {
+  color: var(--color-text-muted);
+  font-size: var(--fs-small);
+}
+
+.solution-card .card-link {
+  margin-top: var(--space-5);
+}
+
+@media (max-width: 980px) {
+  .solution-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .solution-card {
+    min-height: 280px;
   }
 }
 
@@ -1018,8 +1230,8 @@ a.card {
   width: 44px;
   height: 44px;
   border-radius: var(--radius-sm);
-  background: var(--color-accent-light);
-  color: var(--color-accent-dark);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--color-text);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1031,6 +1243,7 @@ a.card {
 }
 
 .benefit h3 {
+  font-family: var(--font-sans);
   font-size: 1.0625rem;
   margin-bottom: var(--space-1);
 }
@@ -1058,7 +1271,7 @@ a.card {
   margin-inline: auto;
   font-size: var(--fs-tiny);
   font-weight: 600;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--color-text-faint);
   margin-bottom: var(--space-6);
@@ -1073,17 +1286,19 @@ a.card {
 }
 
 .trust-logo {
+  /* Farbe allein trägt bereits das reduzierte visuelle Gewicht (WCAG
+     4.5:1 zu --color-bg geprüft) – zusätzliches opacity würde das erneut
+     verwässern und den Kontrast unter die Lesbarkeitsgrenze drücken. */
+  font-family: var(--font-display);
   font-weight: 700;
   font-size: 1.15rem;
   letter-spacing: -0.01em;
   color: var(--color-text-faint);
-  opacity: 0.75;
-  transition: opacity var(--duration-base) var(--ease-out), color var(--duration-base) var(--ease-out);
+  transition: color var(--duration-base) var(--ease-out);
 }
 
 .trust-logo:hover {
-  opacity: 1;
-  color: var(--color-text-muted);
+  color: var(--color-text);
 }
 
 /* ==========================================================================
@@ -1091,7 +1306,10 @@ a.card {
    ========================================================================== */
 
 .cta-banner {
-  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-dark) 100%);
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #17181a 0%, #000000 100%);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: clamp(40px, 6vw, 80px);
   color: #fff;
@@ -1102,23 +1320,26 @@ a.card {
   gap: var(--space-5);
 }
 
+.cta-banner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(60% 80% at 50% 0%, rgba(198, 255, 61, 0.12), transparent 60%);
+  pointer-events: none;
+}
+
+.cta-banner > * {
+  position: relative;
+}
+
 .cta-banner h2 {
   color: #fff;
   max-width: 34ch;
 }
 
 .cta-banner p {
-  color: rgba(255, 255, 255, 0.82);
+  color: rgba(255, 255, 255, 0.78);
   max-width: 52ch;
-}
-
-.cta-banner .btn-primary {
-  background: #fff;
-  color: var(--color-accent-dark);
-}
-
-.cta-banner .btn-primary:hover {
-  background: rgba(255, 255, 255, 0.9);
 }
 
 /* ==========================================================================
@@ -1128,8 +1349,8 @@ a.card {
 .notice {
   display: flex;
   gap: var(--space-4);
-  background: var(--color-accent-light);
-  border: 1px solid rgba(12, 110, 127, 0.18);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-5);
   margin-top: var(--space-5);
@@ -1139,7 +1360,7 @@ a.card {
   width: 22px;
   height: 22px;
   flex-shrink: 0;
-  color: var(--color-accent-dark);
+  color: var(--color-text-muted);
 }
 
 .notice p {
@@ -1157,7 +1378,24 @@ a.card {
    ========================================================================== */
 
 .page-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   padding-block: clamp(56px, 7vw, 96px) var(--space-8);
+}
+
+.page-hero::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  top: -20%;
+  left: 50%;
+  width: 900px;
+  max-width: 140vw;
+  height: 480px;
+  transform: translateX(-50%);
+  background: radial-gradient(50% 50% at 50% 50%, rgba(198, 255, 61, 0.07), transparent 70%);
+  pointer-events: none;
 }
 
 .page-hero .container {
@@ -1276,7 +1514,6 @@ a.card {
 .step .service-index {
   display: block;
   margin-bottom: var(--space-2);
-  color: var(--color-accent);
 }
 
 .step h4 {
@@ -1314,6 +1551,7 @@ a.card {
 }
 
 .faq-item {
+  background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-5);
@@ -1339,10 +1577,12 @@ a.card {
   font-size: 1.25rem;
   line-height: 1;
   color: var(--color-text-faint);
-  transition: transform var(--duration-fast) var(--ease-out);
+  transition: transform var(--duration-fast) var(--ease-out), color var(--duration-fast) var(--ease-out);
 }
 
 .faq-item[open] summary::after {
+  content: '+';
+  color: var(--color-accent);
   transform: rotate(45deg);
 }
 
@@ -1433,7 +1673,7 @@ a.card {
   display: flex;
   gap: 2px;
   flex-shrink: 0;
-  color: var(--color-accent);
+  color: var(--color-text);
   padding-top: 2px;
 }
 
@@ -1460,7 +1700,7 @@ a.card {
 }
 
 .review-item a:hover {
-  color: var(--color-text);
+  color: var(--color-accent);
 }
 
 /* ==========================================================================
@@ -1498,7 +1738,8 @@ a.card {
 }
 
 .contact-info {
-  background: var(--color-bg-alt);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-7);
 }
@@ -1522,9 +1763,8 @@ a.card {
   width: 40px;
   height: 40px;
   border-radius: var(--radius-sm);
-  background: var(--color-surface);
-  box-shadow: var(--shadow-sm);
-  color: var(--color-accent-dark);
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--color-text);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1586,7 +1826,8 @@ a.card {
   padding: var(--space-4);
   border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-sm);
-  background: var(--color-bg);
+  background: var(--color-bg-deep);
+  color: var(--color-text);
   font-size: var(--fs-body);
   transition: border-color var(--duration-base) var(--ease-out), box-shadow var(--duration-base) var(--ease-out);
 }
@@ -1595,7 +1836,7 @@ a.card {
 .form-row textarea:focus {
   outline: none;
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 4px var(--color-accent-light);
+  box-shadow: 0 0 0 4px var(--color-accent-soft);
 }
 
 .form-row textarea {
@@ -1657,13 +1898,15 @@ a.card {
 }
 
 .form-status.success {
-  background: #eaf6ef;
-  color: var(--color-success);
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  border: 1px solid rgba(198, 255, 61, 0.3);
 }
 
 .form-status.error {
   background: var(--color-danger-bg);
   color: var(--color-danger);
+  border: 1px solid rgba(255, 107, 82, 0.3);
 }
 
 .form-status svg {
@@ -1689,6 +1932,7 @@ a.card {
 .legal-content h2 {
   margin-top: var(--space-8);
   margin-bottom: var(--space-3);
+  font-family: var(--font-sans);
   font-size: var(--fs-h3);
 }
 
@@ -1749,7 +1993,12 @@ a.card {
 .site-footer {
   border-top: 1px solid var(--color-border);
   padding-block: var(--space-8) var(--space-6);
-  background: var(--color-bg-alt);
+  background: var(--color-bg-deep);
+  color: #fff;
+}
+
+.site-footer .brand {
+  color: #fff;
 }
 
 .footer-grid {
@@ -1760,17 +2009,20 @@ a.card {
 
 .footer-brand p {
   margin-top: var(--space-4);
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.55);
   font-size: var(--fs-small);
   max-width: 32ch;
 }
 
 .footer-col h4 {
+  /* rgba(.5) statt (.4): 5.3:1 gegen Schwarz, erfüllt WCAG AA 4.5:1
+     für normalen Text (die Spaltentitel sind trotz klein/uppercase
+     keine "large text"-Ausnahme). */
   font-size: var(--fs-tiny);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: var(--color-text-faint);
+  color: rgba(255, 255, 255, 0.5);
   margin-bottom: var(--space-4);
 }
 
@@ -1782,12 +2034,12 @@ a.card {
 
 .footer-col a {
   font-size: var(--fs-small);
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.72);
   transition: color var(--duration-base) var(--ease-out);
 }
 
 .footer-col a:hover {
-  color: var(--color-accent-dark);
+  color: var(--color-accent);
 }
 
 .footer-bottom {
@@ -1800,7 +2052,7 @@ a.card {
   padding-top: var(--space-6);
   border-top: 1px solid var(--color-border);
   font-size: var(--fs-tiny);
-  color: var(--color-text-faint);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 @media (max-width: 860px) {
