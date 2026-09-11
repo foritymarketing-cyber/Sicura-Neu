@@ -861,63 +861,6 @@ body.has-video-hero .site-header:not(.is-scrolled)::before {
 }
 
 /* ==========================================================================
-   Stat-Band — Vertrauens-Zahlen groß inszeniert
-   ========================================================================== */
-
-.stat-band {
-  position: relative;
-  background: var(--color-bg-deep);
-  border-block: 1px solid var(--color-border);
-}
-
-.stat-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-7);
-}
-
-.stat-item {
-  padding-top: var(--space-4);
-  border-top: 2px solid var(--color-accent);
-  box-shadow: 0 0 8px 0 rgba(198, 255, 61, 0.25);
-}
-
-.stat-number {
-  /* tabular-nums: Ziffern haben gleiche Breite, damit die Count-up-
-     Animation (motion-effects.js) nicht ruckelt/springt, während sich
-     die Zahl ändert. */
-  display: block;
-  font-family: var(--font-display);
-  font-size: var(--fs-stat);
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.02em;
-  line-height: 1;
-  color: var(--color-text);
-}
-
-.stat-label {
-  display: block;
-  margin-top: var(--space-3);
-  font-size: var(--fs-small);
-  color: var(--color-text-muted);
-  max-width: 24ch;
-}
-
-@media (max-width: 900px) {
-  .stat-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--space-6);
-  }
-}
-
-@media (max-width: 480px) {
-  .stat-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-/* ==========================================================================
    Karten
    ========================================================================== */
 
@@ -1267,17 +1210,14 @@ a.card {
   text-align: center;
 }
 
-.trust > .container > p {
-  margin-inline: auto;
-  font-size: var(--fs-tiny);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--color-text-faint);
-  margin-bottom: var(--space-6);
+.trust-logos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
 }
 
-.trust-logos {
+.trust-logos-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1607,13 +1547,32 @@ a.card {
    Fallbeispiele (Referenzen)
    ========================================================================== */
 
-.case-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+.conveyor {
+  overflow-x: auto;
+  overflow-y: hidden;
+  cursor: grab;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  margin-inline: calc(var(--space-6) * -1);
+  padding-inline: var(--space-6);
+}
+
+.conveyor::-webkit-scrollbar {
+  display: none;
+}
+
+.conveyor:active {
+  cursor: grabbing;
+}
+
+.conveyor-track {
+  display: flex;
   gap: var(--space-5);
+  width: max-content;
 }
 
 .case-card {
+  flex: 0 0 min(340px, 82vw);
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
@@ -1645,12 +1604,6 @@ a.card {
 .case-field dd {
   font-size: var(--fs-small);
   color: var(--color-text-muted);
-}
-
-@media (max-width: 980px) {
-  .case-grid {
-    grid-template-columns: 1fr;
-  }
 }
 
 /* ==========================================================================

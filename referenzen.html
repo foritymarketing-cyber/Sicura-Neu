@@ -49,62 +49,129 @@
 
     <section class="section" style="padding-top:0">
       <div class="container">
-        <div class="case-grid" data-reveal-group>
-          <div class="case-card" data-reveal>
-            <p class="eyebrow">Klinik</p>
-            <h3>Klinik im Rhein-Main-Gebiet</h3>
-            <dl>
-              <div class="case-field">
-                <dt>Ausgangslage</dt>
-                <dd class="placeholder-inline">[folgt – telefonisch mit der Kundin abzustimmen, siehe Notion 19]</dd>
-              </div>
-              <div class="case-field">
-                <dt>Lösung</dt>
-                <dd class="placeholder-inline">[folgt]</dd>
-              </div>
-              <div class="case-field">
-                <dt>Ergebnis</dt>
-                <dd class="placeholder-inline">[folgt]</dd>
-              </div>
-            </dl>
-          </div>
+        <div
+          class="conveyor"
+          data-reveal
+          data-conveyor
+          tabindex="0"
+          role="region"
+          aria-label="Referenzprojekte, laufen automatisch von rechts nach links. Zum Anhalten mit der Maus darüberfahren oder per Tab fokussieren; mit gedrückter Maustaste, Finger oder Pfeiltasten frei verschiebbar."
+        >
+          <div class="conveyor-track" data-conveyor-track>
+            <div class="case-card">
+              <p class="eyebrow">Klinik</p>
+              <h3>Klinik im Rhein-Main-Gebiet</h3>
+              <dl>
+                <div class="case-field">
+                  <dt>Ausgangslage</dt>
+                  <dd class="placeholder-inline">[folgt – telefonisch mit der Kundin abzustimmen, siehe Notion 19]</dd>
+                </div>
+                <div class="case-field">
+                  <dt>Lösung</dt>
+                  <dd class="placeholder-inline">[folgt]</dd>
+                </div>
+                <div class="case-field">
+                  <dt>Ergebnis</dt>
+                  <dd class="placeholder-inline">[folgt]</dd>
+                </div>
+              </dl>
+            </div>
 
-          <div class="case-card" data-reveal>
-            <p class="eyebrow">Waschstraße</p>
-            <h3>Waschstraße im Rhein-Main-Gebiet</h3>
-            <dl>
-              <div class="case-field">
-                <dt>Ausgangslage</dt>
-                <dd class="placeholder-inline">[folgt – telefonisch mit der Kundin abzustimmen, siehe Notion 19]</dd>
-              </div>
-              <div class="case-field">
-                <dt>Lösung</dt>
-                <dd class="placeholder-inline">[folgt]</dd>
-              </div>
-              <div class="case-field">
-                <dt>Ergebnis</dt>
-                <dd class="placeholder-inline">[folgt]</dd>
-              </div>
-            </dl>
-          </div>
+            <div class="case-card">
+              <p class="eyebrow">Waschstraße</p>
+              <h3>Waschstraße im Rhein-Main-Gebiet</h3>
+              <dl>
+                <div class="case-field">
+                  <dt>Ausgangslage</dt>
+                  <dd class="placeholder-inline">[folgt – telefonisch mit der Kundin abzustimmen, siehe Notion 19]</dd>
+                </div>
+                <div class="case-field">
+                  <dt>Lösung</dt>
+                  <dd class="placeholder-inline">[folgt]</dd>
+                </div>
+                <div class="case-field">
+                  <dt>Ergebnis</dt>
+                  <dd class="placeholder-inline">[folgt]</dd>
+                </div>
+              </dl>
+            </div>
 
-          <div class="case-card" data-reveal>
-            <p class="eyebrow">Arztpraxen</p>
-            <h3>Arztpraxen in Wiesbaden</h3>
-            <dl>
-              <div class="case-field">
-                <dt>Ausgangslage</dt>
-                <dd class="placeholder-inline">[folgt – telefonisch mit der Kundin abzustimmen, siehe Notion 19]</dd>
-              </div>
-              <div class="case-field">
-                <dt>Lösung</dt>
-                <dd class="placeholder-inline">[folgt]</dd>
-              </div>
-              <div class="case-field">
-                <dt>Ergebnis</dt>
-                <dd class="placeholder-inline">[folgt]</dd>
-              </div>
-            </dl>
+            <div class="case-card">
+              <p class="eyebrow">Arztpraxen</p>
+              <h3>Arztpraxen in Wiesbaden</h3>
+              <dl>
+                <div class="case-field">
+                  <dt>Ausgangslage</dt>
+                  <dd class="placeholder-inline">[folgt – telefonisch mit der Kundin abzustimmen, siehe Notion 19]</dd>
+                </div>
+                <div class="case-field">
+                  <dt>Lösung</dt>
+                  <dd class="placeholder-inline">[folgt]</dd>
+                </div>
+                <div class="case-field">
+                  <dt>Ergebnis</dt>
+                  <dd class="placeholder-inline">[folgt]</dd>
+                </div>
+              </dl>
+            </div>
+
+            <!-- Duplikat für nahtlose Endlosschleife, für Screenreader ausgeblendet -->
+            <div class="case-card" aria-hidden="true">
+              <p class="eyebrow">Klinik</p>
+              <h3>Klinik im Rhein-Main-Gebiet</h3>
+              <dl>
+                <div class="case-field">
+                  <dt>Ausgangslage</dt>
+                  <dd class="placeholder-inline">[folgt – telefonisch mit der Kundin abzustimmen, siehe Notion 19]</dd>
+                </div>
+                <div class="case-field">
+                  <dt>Lösung</dt>
+                  <dd class="placeholder-inline">[folgt]</dd>
+                </div>
+                <div class="case-field">
+                  <dt>Ergebnis</dt>
+                  <dd class="placeholder-inline">[folgt]</dd>
+                </div>
+              </dl>
+            </div>
+
+            <div class="case-card" aria-hidden="true">
+              <p class="eyebrow">Waschstraße</p>
+              <h3>Waschstraße im Rhein-Main-Gebiet</h3>
+              <dl>
+                <div class="case-field">
+                  <dt>Ausgangslage</dt>
+                  <dd class="placeholder-inline">[folgt – telefonisch mit der Kundin abzustimmen, siehe Notion 19]</dd>
+                </div>
+                <div class="case-field">
+                  <dt>Lösung</dt>
+                  <dd class="placeholder-inline">[folgt]</dd>
+                </div>
+                <div class="case-field">
+                  <dt>Ergebnis</dt>
+                  <dd class="placeholder-inline">[folgt]</dd>
+                </div>
+              </dl>
+            </div>
+
+            <div class="case-card" aria-hidden="true">
+              <p class="eyebrow">Arztpraxen</p>
+              <h3>Arztpraxen in Wiesbaden</h3>
+              <dl>
+                <div class="case-field">
+                  <dt>Ausgangslage</dt>
+                  <dd class="placeholder-inline">[folgt – telefonisch mit der Kundin abzustimmen, siehe Notion 19]</dd>
+                </div>
+                <div class="case-field">
+                  <dt>Lösung</dt>
+                  <dd class="placeholder-inline">[folgt]</dd>
+                </div>
+                <div class="case-field">
+                  <dt>Ergebnis</dt>
+                  <dd class="placeholder-inline">[folgt]</dd>
+                </div>
+              </dl>
+            </div>
           </div>
         </div>
       </div>
