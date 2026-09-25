@@ -981,6 +981,20 @@ a.card {
   transform: scale(1.06);
 }
 
+/* Diese Karten zeigen ein Foto statt einer Text-Grafik: randlos füllen (cover)
+   statt Letterboxing (contain), das jeweilige Motiv bleibt dabei sichtbar. */
+.card--media-cover .card-media img {
+  object-fit: cover;
+}
+
+.card--media-cover--camera .card-media img {
+  object-position: 52% 50%;
+}
+
+.card--media-cover--alarm .card-media img {
+  object-position: 50% 42%;
+}
+
 .card-body {
   position: relative;
   height: 100%;
